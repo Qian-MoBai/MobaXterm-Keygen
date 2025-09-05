@@ -120,23 +120,6 @@ const EncryptBytes = (key: number, bs: Uint8Array) => {
 }
 
 /**
- * 解密字节数组
- *
- * @param key
- * @param bs
- * @returns
- */
-const DecryptBytes = (key: number, bs: Uint8Array) => {
-  let result: number[] = []
-  bs.forEach((val) => {
-    const xorVal = val ^ ((key >> 8) & 0xff)
-    result.push(xorVal)
-    key = (val & key) | 0x482d
-  })
-  return new Uint8Array(result)
-}
-
-/**
  * 生成许可证
  *
  */
