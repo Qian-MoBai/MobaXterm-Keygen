@@ -3,6 +3,7 @@ import { generateLicense, LicenseType } from '@/api/MobaXtermGenerater'
 import JSZip from 'jszip'
 import { ref } from 'vue'
 import { saveAs } from 'file-saver'
+import { ElMessage } from 'element-plus'
 
 type optionsType = {
   label: string
@@ -55,7 +56,7 @@ const submitForm = async () => {
     )
     generateLicenseFile(license)
   } catch (error) {
-    alert('表单验证失败')
+    ElMessage.error('表单验证失败')
   }
 }
 const generateLicenseFile = async (license: string) => {
@@ -64,8 +65,13 @@ const generateLicenseFile = async (license: string) => {
   try {
     const content = await zip.generateAsync({ type: 'blob' })
     saveAs(content, 'Custom.mxtpro')
+    ElMessage({
+      message: '生成成功，请下载文件',
+      type: 'success',
+    })
   } catch (error) {
-    console.log(error)
+    ElMessage.error("出现错误，请前往控制台查看")
+    console.log(error);
   }
 }
 </script>
@@ -76,14 +82,7 @@ const generateLicenseFile = async (license: string) => {
       <h1>MobaXterm 生成器</h1>
     </el-header>
     <el-main>
-      <el-form
-        ref="formRef"
-        class="form"
-        :rules="rules"
-        :model="form"
-        label-width="auto"
-        label-suffix=":"
-      >
+      <el-form ref="formRef" class="form" :rules="rules" :model="form" label-width="auto" label-suffix=":">
         <el-form-item label="版本" prop="type">
           <el-cascader :options="options" v-model="form.type" placeholder="请选择版本" />
         </el-form-item>
