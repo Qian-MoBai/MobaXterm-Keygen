@@ -1,8 +1,8 @@
 const VariantBase64Table =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='.split('')
-let VariantBase64Dict: { [key: number]: string } = {}
+const VariantBase64Dict: { [key: number]: string } = {}
 VariantBase64Table.forEach((val, i) => (VariantBase64Dict[i] = val))
-let VariantBase64ReverseDict: { [key: string]: number } = {}
+const VariantBase64ReverseDict: { [key: string]: number } = {}
 VariantBase64Table.forEach((val, i) => (VariantBase64ReverseDict[val] = i))
 
 /* License 类型 */
@@ -57,9 +57,9 @@ const bytesToInt = (bytes: Uint8Array, offset: number, littleEndian: boolean = t
  * @returns
  */
 const VariantBase64Encode = (bs: Uint8Array) => {
-  let result: number[] = []
-  let blocks_count = Math.floor(bs.length / 3)
-  let left_bytes = bs.length % 3
+  const result: number[] = []
+  const blocks_count = Math.floor(bs.length / 3)
+  const left_bytes = bs.length % 3
   let coding_int: number, block: string
   for (let i = 0; i < blocks_count; i++) {
     coding_int = bytesToInt(bs, 3 * i, true)
@@ -109,7 +109,7 @@ const VariantBase64Encode = (bs: Uint8Array) => {
  * @returns
  */
 const EncryptBytes = (key: number, bs: Uint8Array) => {
-  let result: number[] = []
+  const result: number[] = []
   bs.forEach((val) => {
     const xorVal = val ^ ((key >> 8) & 0xff)
     result.push(xorVal)
@@ -122,6 +122,11 @@ const EncryptBytes = (key: number, bs: Uint8Array) => {
 /**
  * 生成许可证
  *
+ * @param type 版本
+ * @param count 用户数
+ * @param userName 用户名
+ * @param majorVersion 大版本号 例：25.2 取 25
+ * @param minorVersion 小版本号 例：25.2 取 2
  */
 const generateLicense = (
   type: number,
@@ -130,7 +135,7 @@ const generateLicense = (
   majorVersion: number,
   minorVersion: number,
 ) => {
-  let licenseSourceStr = `${type}#${userName}|${majorVersion}${minorVersion}#${count}#${majorVersion}3${minorVersion}6${minorVersion}#0#0#0#`
+  const licenseSourceStr = `${type}#${userName}|${majorVersion}${minorVersion}#${count}#${majorVersion}3${minorVersion}6${minorVersion}#0#0#0#`
   const encryptedBytes = EncryptBytes(0x787, stringToBytes(licenseSourceStr))
   const encodedBytes = VariantBase64Encode(encryptedBytes)
   return bytesToString(encodedBytes)
