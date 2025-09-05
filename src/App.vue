@@ -59,10 +59,10 @@ const submitForm = async () => {
   }
 }
 const generateLicenseFile = async (license: string) => {
-  let zip = new JSZip()
+  const zip = new JSZip()
   zip.file('Pro.key', license)
   try {
-    let content = await zip.generateAsync({ type: 'blob' })
+    const content = await zip.generateAsync({ type: 'blob' })
     saveAs(content, 'Custom.mxtpro')
   } catch (error) {
     console.log(error)
