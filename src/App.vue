@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { generateLicense, LicenseType } from '@/api/mobaXtermGenerater'
+import { generateLicense, LicenseType } from '@/api/MobaXtermGenerater'
 import { ref, version } from 'vue'
 
 type optionsType = {
