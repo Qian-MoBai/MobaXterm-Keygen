@@ -1,6 +1,6 @@
 {
   "name": "mobaxterm-keygen",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -16,7 +16,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@types/file-saver": "^2.0.7",
     "element-plus": "^2.11.1",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
     "vue": "^3.5.18"
   },
   "devDependencies": {
