@@ -65,10 +65,7 @@ const generateLicenseFile = async (license: string) => {
   try {
     const content = await zip.generateAsync({ type: 'blob' })
     saveAs(content, 'Custom.mxtpro')
-    ElMessage({
-      message: '生成成功，请下载文件',
-      type: 'success',
-    })
+    ElMessage.success('生成成功，请下载文件')
   } catch (error) {
     ElMessage.error("出现错误，请前往控制台查看")
     console.log(error);
@@ -100,15 +97,21 @@ const generateLicenseFile = async (license: string) => {
         </el-form-item>
       </el-form>
     </el-main>
-    <el-footer> </el-footer>
+    <el-footer class="footer">
+      <a href="https://github.com/flygon2018/MobaXterm-keygen">MobaXterm Keygen 原作者仓库</a>
+      <a href="https://stuk.github.io/jszip">JSZip</a>
+      <a href="https://github.com/eligrey/FileSaver.js">FileSaver</a>
+    </el-footer>
   </el-container>
 </template>
 
 <style scoped>
-.container-box {
+.container-box,
+.footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 
 :deep(.el-form-item__content) {
