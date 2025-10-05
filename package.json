@@ -1,7 +1,11 @@
 {
   "name": "mobaxterm-keygen",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
+  "author": {
+    "name": "Qian-MoBai",
+    "email": "Qian-MoBai@outlook.com"
+  },
   "type": "module",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
