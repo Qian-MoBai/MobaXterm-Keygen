@@ -24,7 +24,8 @@
     "element-plus": "^2.11.4",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
-    "vue": "^3.5.18"
+    "vue": "^3.5.18",
+    "vue-i18n": "^11.1.12"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",
