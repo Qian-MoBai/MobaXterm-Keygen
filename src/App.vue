@@ -98,9 +98,9 @@ const generateLicenseFile = async (license: string) => {
       </el-form>
     </el-main>
     <el-footer class="footer">
-      <a href="https://github.com/flygon2018/MobaXterm-keygen">MobaXterm Keygen 原作者仓库</a>
-      <a href="https://stuk.github.io/jszip">JSZip</a>
-      <a href="https://github.com/eligrey/FileSaver.js">FileSaver</a>
+      <el-link href="https://github.com/flygon2018/MobaXterm-keygen">MobaXterm Keygen 原作者仓库</el-link>
+      <el-link href="https://stuk.github.io/jszip">JSZip</el-link>
+      <el-link href="https://github.com/eligrey/FileSaver.js">FileSaver</el-link>
     </el-footer>
   </el-container>
 </template>
