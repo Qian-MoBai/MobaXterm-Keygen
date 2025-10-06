@@ -1,5 +1,7 @@
 # MobaXterm Keygen
 
+[English Version](README_EN.md)
+
 MobaXterm 注册码生成器是一个基于 Vue 3 + TypeScript 的网页应用程序，用于生成 MobaXterm 的许可证文件。
 
 > ⚠️ 注意：本项目仅供学习和研究用途，请在遵守当地法律法规的前提下使用。
