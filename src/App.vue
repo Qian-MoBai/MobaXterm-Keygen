@@ -1,29 +1,33 @@
 <script setup lang="ts">
 import { generateLicense, LicenseType } from '@/api/MobaXtermGenerater'
 import JSZip from 'jszip'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { saveAs } from 'file-saver'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 
+const { t: $t, locale } = useI18n()
+
+const language = ref('zh_CN');
 type optionsType = {
   label: string
   value: number
 }
 
-const options: optionsType[] = [
+const options = computed((): optionsType[] => [
   {
-    label: 'Persional',
+    label: $t('options.persional'),
     value: LicenseType.Persional,
   },
   {
-    label: 'Professional',
+    label: $t('options.professional'),
     value: LicenseType.Professional,
   },
   {
-    label: 'Educational',
+    label: $t('options.educational'),
     value: LicenseType.Educational,
   },
-]
+])
 
 const formRef = ref()
 
@@ -33,12 +37,12 @@ const form = ref({
   version: '',
   count: '',
 })
-const rules = {
-  type: { required: true, message: '版本是必要的' },
-  userName: { required: true, message: '用户名是必要的' },
-  version: { required: true, message: '版本号是必要的' },
-  count: { required: true, message: '用户数是必要的' },
-}
+const rules = computed(() => ({
+  type: { required: true, message: $t('rules.type') },
+  userName: { required: true, message: $t('rules.userName') },
+  version: { required: true, message: $t('rules.version') },
+  count: { required: true, message: $t('rules.count') },
+}))
 /** 生成许可证 */
 const submitForm = async () => {
   try {
@@ -56,7 +60,7 @@ const submitForm = async () => {
     )
     generateLicenseFile(license)
   } catch (error) {
-    ElMessage.error('表单验证失败')
+    ElMessage.error($t('message.formError'))
   }
 }
 const generateLicenseFile = async (license: string) => {
@@ -65,40 +69,45 @@ const generateLicenseFile = async (license: string) => {
   try {
     const content = await zip.generateAsync({ type: 'blob' })
     saveAs(content, 'Custom.mxtpro')
-    ElMessage.success('生成成功，请下载文件')
+    ElMessage.success($t('message.success'))
   } catch (error) {
-    ElMessage.error("出现错误，请前往控制台查看")
+    ElMessage.error($t('message.error'))
     console.log(error);
   }
+}
+const changeLanguage = (language: string) => {
+  locale.value = language
 }
 </script>
 
 <template>
   <el-container class="container-box">
+    <el-switch v-model="language" active-text="简体中文" active-value="zh_CN" inactive-text="English" inactive-value="en_US"
+      @change="changeLanguage(language)" />
     <el-header>
-      <h1>MobaXterm 生成器</h1>
+      <h1>{{ $t('title') }}</h1>
     </el-header>
     <el-main>
       <el-form ref="formRef" class="form" :rules="rules" :model="form" label-width="auto" label-suffix=":">
-        <el-form-item label="版本" prop="type">
-          <el-cascader :options="options" v-model="form.type" placeholder="请选择版本" />
+        <el-form-item :label="$t('label.type')" prop="type">
+          <el-cascader :options="options" v-model="form.type" :placeholder="$t('input.type')" />
         </el-form-item>
-        <el-form-item label="用户名" prop="userName">
-          <el-input type="input" v-model="form.userName" placeholder="请输入用户名" clearable />
+        <el-form-item :label="$t('label.username')" prop="userName">
+          <el-input type="input" v-model="form.userName" :placeholder="$t('input.username')" clearable />
         </el-form-item>
-        <el-form-item label="版本号" prop="version">
-          <el-input type="input" v-model="form.version" placeholder="请输入版本号" clearable />
+        <el-form-item :label="$t('label.version')" prop="version">
+          <el-input type="input" v-model="form.version" :placeholder="$t('input.version')" clearable />
         </el-form-item>
-        <el-form-item label="用户数" prop="count">
-          <el-input type="input" v-model="form.count" placeholder="请输入用户数" clearable />
+        <el-form-item :label="$t('label.count')" prop="count">
+          <el-input type="input" v-model="form.count" :placeholder="$t('input.count')" clearable />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @Click="submitForm">立即生成</el-button>
+          <el-button type="primary" @Click="submitForm">{{ $t('label.button') }}</el-button>
         </el-form-item>
       </el-form>
     </el-main>
     <el-footer class="footer">
-      <el-link href="https://github.com/flygon2018/MobaXterm-keygen">MobaXterm Keygen 原作者仓库</el-link>
+      <el-link href="https://github.com/flygon2018/MobaXterm-keygen">{{ $t('footer.origin') }}</el-link>
       <el-link href="https://stuk.github.io/jszip">JSZip</el-link>
       <el-link href="https://github.com/eligrey/FileSaver.js">FileSaver</el-link>
     </el-footer>
