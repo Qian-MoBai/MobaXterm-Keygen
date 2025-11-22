@@ -43,19 +43,19 @@ MobaXterm Key Generator is a web application based on Vue 3 + TypeScript, used t
 ### Install Dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Start Development Server
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### Build Production Version
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ## How It Works

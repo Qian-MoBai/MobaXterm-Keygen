@@ -43,19 +43,19 @@ MobaXterm 注册码生成器是一个基于 Vue 3 + TypeScript 的网页应用�
 ### 安装依赖
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 启动开发服务器
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### 构建生产版本
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ## 工作原理
